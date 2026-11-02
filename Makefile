@@ -1,6 +1,7 @@
 .PHONY: build build_debug
 
 SOURCES := \
+	base/string_view.c \
 	cmd/main.c \
 	router/router.c \
 	router/http.c \
@@ -13,7 +14,7 @@ LIBS := $(shell pkg-config --cflags --libs libmicrohttpd libpq) -lm
 
 build_debug:
 	mkdir -p bin
-	clang -DDEBUG=1 -DRAX_DEBUG_MSG=1 -g3 -O0 $(SOURCES) -o bin/main_debug $(LIBS)
+	clang -DDEBUG=1 -g3 -O0 $(SOURCES) -o bin/main_debug $(LIBS)
 
 build:
 	mkdir -p bin

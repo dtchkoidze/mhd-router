@@ -4,6 +4,9 @@
     fprintf(stderr, __VA_ARGS__);                                 \
     fflush(stderr);                                               \
 } while (0)
+
+#define assert(c) if (!(c)) __builtin_trap()
+
 #else
 #define debugf(...) ((void)0)
 #endif

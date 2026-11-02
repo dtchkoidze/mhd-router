@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../base/string_view.h"
+
 /**
  *
  *
@@ -91,6 +93,15 @@ int main(int argc, char **argv) {
         printf("%s PORT\n", argv[0]);
         return 1;
     }
+
+    // testing s8s
+    s8 str = s8_lit("AYOOO LITERAL FUCKING STRING");
+    printf("my striiing: %.*s\n", s8_spread(str));
+
+    u8 compact_data[128];
+    s8 compact = s8_trimspace(&str, compact_data, sizeof(compact_data));
+    printf("without whitespace: %.*s\n", s8_spread(compact));
+
 
     http_router *r = &(http_router){0};
     r_result r_init = router_init(r, "/api");

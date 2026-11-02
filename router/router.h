@@ -12,6 +12,8 @@
 typedef enum MHD_Result MHD_Result;
 typedef struct MHD_Connection http_conn;
 typedef struct MHD_Response http_resp;
+// END
+
 
 typedef struct http_url_param {
     const char *key;

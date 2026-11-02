@@ -1,12 +1,12 @@
 #pragma once
 #include <inttypes.h>
 
-#define uint64_t u64
-#define uint32_t u32
-#define uint16_t u16
-#define uint8_t u8
+#define u64 uint64_t
+#define u32 uint32_t
+#define u16 uint16_t
+#define u8 uint8_t
 
-#define iint64_t i64
-#define iint32_t i32
-#define iint16_t i16
-#define iint8_t i8
+#define i64 int64_t
+#define i32 int32_t
+#define i16 int16_t
+#define i8 int8_t
