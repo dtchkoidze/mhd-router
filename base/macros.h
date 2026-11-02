@@ -9,4 +9,5 @@
 
 #else
 #define debugf(...) ((void)0)
+#define assert(...)((void)0)
 #endif

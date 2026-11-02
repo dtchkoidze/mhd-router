@@ -1,7 +1,7 @@
 #include "string_view.h"
-#include "integers.h"
+#include "../base/integers.h"
 #include <string.h>
-#include "macros.h"
+#include "../base/macros.h"
 
 typedef struct split_half_res {
     s8 a;

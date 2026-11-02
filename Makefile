@@ -1,9 +1,10 @@
 .PHONY: build build_debug
 
 SOURCES := \
-	base/string_view.c \
+	string_view/string_view.c \
 	cmd/main.c \
 	router/router.c \
+	router/util.c \
 	router/http.c \
 	router/rax.c \
 	router/rc4rand.c \

@@ -1,11 +1,12 @@
 #include "../router/router.h"
+#include "../router/util.h"
 #include <assert.h>
 #include <libpq-fe.h>
 #include <microhttpd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../base/string_view.h"
+#include "../string_view/string_view.h"
 
 /**
  *
@@ -15,28 +16,18 @@
 
 MHD_Result handle_get_health(http_request *req) {
     assert(strcmp(req->method, "GET") == 0);
-    static const char json[] = "{\"status\": \"operational\"}";
-    MHD_Result ret;
-    struct MHD_Response *res;
-
-    res = MHD_create_response_from_buffer(sizeof(json) - 1, (void *)json, MHD_RESPMEM_PERSISTENT);
-    MHD_add_response_header(res, "Content-Type", "Application/json");
-    ret = MHD_queue_response(req->conn, MHD_HTTP_OK, res);
-    MHD_destroy_response(res);
-    return ret;
+    s8 json = s8_lit("{\"status\": \"operational\"}");
+    return write_json(req, MHD_HTTP_OK, json);
 }
 
 MHD_Result handle_get_parameterized(http_request *req) {
     assert(strcmp(req->method, "GET") == 0);
-
-
     const http_url_param *id = router_url_param(req, "id");
     if (id == NULL) {
         return MHD_NO;
     }
 
     char json[256];
-
     int written = snprintf(
         json,
         sizeof(json),
@@ -62,28 +53,14 @@ MHD_Result handle_get_parameterized(http_request *req) {
 
 MHD_Result handle_get_test(http_request *req) {
     assert(strcmp(req->method, "GET") == 0);
-    static const char json[] = "{\"testing\": \"yuuurrr\"}";
-    MHD_Result ret;
-    struct MHD_Response *res;
-
-    res = MHD_create_response_from_buffer(sizeof(json) - 1, (void *)json, MHD_RESPMEM_PERSISTENT);
-    MHD_add_response_header(res, "Content-Type", "Application/json");
-    ret = MHD_queue_response(req->conn, MHD_HTTP_OK, res);
-    MHD_destroy_response(res);
-    return ret;
+    s8 json = s8_lit("{\"testing\": \"yuuurrr\"}");
+    return write_json(req, MHD_HTTP_OK, json);
 }
 
 MHD_Result handle_get_tekla(http_request *req) {
     assert(strcmp(req->method, "GET") == 0);
-    static const char json[] = "{\"endpoint\": \"tekla\"}";
-    MHD_Result ret;
-    struct MHD_Response *res;
-
-    res = MHD_create_response_from_buffer(sizeof(json) - 1, (void *)json, MHD_RESPMEM_PERSISTENT);
-    MHD_add_response_header(res, "Content-Type", "Application/json");
-    ret = MHD_queue_response(req->conn, MHD_HTTP_OK, res);
-    MHD_destroy_response(res);
-    return ret;
+    s8 json = s8_lit("{\"endpoint\": \"tekla\"}");
+    return write_json(req, MHD_HTTP_OK, json);
 }
 
 int main(int argc, char **argv) {
